@@ -1,16 +1,22 @@
-import { neon } from "@neondatabase/serverless";
+import { supabase } from "@/lib/supabase";
 import type { EnquiryInput } from "@/lib/schemas";
 
-// Schema in lib/submissions.sql — run once against the provisioned database.
-const sql = process.env.DATABASE_URL ? neon(process.env.DATABASE_URL) : null;
-
+// Schema in lib/submissions.sql — run once against the provisioned Supabase project.
 export async function saveSubmission(data: EnquiryInput) {
-  if (!sql) {
-    throw new Error("DATABASE_URL is not configured");
+  if (!supabase) {
+    throw new Error("SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY are not configured");
   }
 
-  await sql`
-    INSERT INTO enquiries (name, org, email, phone, service, message)
-    VALUES (${data.name}, ${data.org}, ${data.email}, ${data.phone ?? null}, ${data.service}, ${data.message ?? null})
-  `;
+  const { error } = await supabase.from("enquiries").insert({
+    name: data.name,
+    org: data.org,
+    email: data.email,
+    phone: data.phone ?? null,
+    service: data.service,
+    message: data.message ?? null,
+  });
+
+  if (error) {
+    throw error;
+  }
 }
