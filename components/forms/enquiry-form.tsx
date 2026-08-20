@@ -98,9 +98,7 @@ export function EnquiryForm() {
       <div className="rounded-md border border-rule bg-paper-raised p-8">
         <p className="font-mono text-xs uppercase tracking-[0.09em] text-cleared">Sent</p>
         <h2 className="mt-2 text-xl font-bold tracking-tight text-primary">We&apos;ve got it.</h2>
-        <p className="mt-2 text-sm text-slate">
-          We&apos;ll come back to you shortly. If it&apos;s urgent, WhatsApp us in the meantime.
-        </p>
+        <p className="mt-2 text-sm text-slate">We&apos;ll come back to you shortly.</p>
       </div>
     );
   }
