@@ -10,7 +10,7 @@ import { SERVICES } from "@/content/services";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Risk assessment, gap analysis, vulnerability assessment and network protection for Nigerian organisations — each with a stated deliverable.",
+    "Risk assessment, gap analysis, vulnerability assessment and network protection for UK organisations — each with a stated deliverable.",
 };
 
 const SERVICE_IMAGES: Record<string, string> = {

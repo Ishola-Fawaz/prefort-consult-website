@@ -38,7 +38,7 @@ export function Insights() {
           <Reveal delay={100} className="mt-10">
             <PendingNote>
               The first articles are in progress covering risk assessment, security
-              fundamentals and what regulation means in practice for Nigerian organisations.
+              fundamentals and what regulation means in practice for UK organisations.
               Check back shortly.
             </PendingNote>
           </Reveal>

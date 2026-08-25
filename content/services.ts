@@ -25,7 +25,7 @@ export const SERVICES: Service[] = [
     tag: "Compliance",
     title: "Gap analysis",
     summary:
-      "A control by control comparison of current practice against the standard you're working toward NDPA, ISO 27001, PCI DSS or CBN's risk-based framework with what's missing made explicit.",
+      "A control by control comparison of current practice against the standard you're working toward UK GDPR, ISO 27001, PCI DSS or Cyber Essentials with what's missing made explicit.",
     deliverable:
       "A control by control gap report mapped to the chosen standard, with an owner and effort estimate per gap.",
   },

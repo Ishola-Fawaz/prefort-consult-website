@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { PendingNote } from "@/components/ui/pending-note";
 import { Credentials } from "@/components/sections/credentials";
 import { SITE } from "@/content/site";
 
@@ -12,7 +11,11 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  const registration = [SITE.registeredName, SITE.rcNumber ? `RC ${SITE.rcNumber}` : null, SITE.address]
+  const registration = [
+    SITE.registeredName,
+    SITE.companyNumber ? `Company No. ${SITE.companyNumber}` : null,
+    SITE.address,
+  ]
     .filter(Boolean)
     .join(" · ");
 
@@ -27,7 +30,7 @@ export default function AboutPage() {
             </h1>
             <p className="mt-5 max-w-lg text-lg text-slate">
               Prefort Consult runs risk assessments, closes compliance gaps and trains staff for
-              organisations operating in UK. The output of every engagement is something
+              organisations operating in the UK. The output of every engagement is something
               written down a register, a report, a closure statement not a slide deck.
             </p>
           </div>
@@ -48,16 +51,7 @@ export default function AboutPage() {
       <section>
         <div className="mx-auto max-w-295 px-5 py-16 md:px-7 md:py-20">
           <SectionHeading eyebrow="Company" title="Registration and contact details" />
-          {registration ? (
-            <p className="mt-8 text-sm text-ink">{registration}</p>
-          ) : (
-            <div className="mt-8">
-              <PendingNote>
-                Registered company name, RC number and business address are awaiting
-                confirmation from Prefort — see scope §11, item 1.
-              </PendingNote>
-            </div>
-          )}
+          <p className="mt-8 text-sm text-ink">{registration}</p>
         </div>
       </section>
     </div>

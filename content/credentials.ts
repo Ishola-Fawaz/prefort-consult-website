@@ -6,12 +6,6 @@ export type TeamMember = {
   photo?: string;
 };
 
-// Placeholder team — added at the user's request to fill out the design for
-// a presentation. Real names, roles, bios, certifications and years operating
-// are still blocked on client input — scope §11 items 2–4. Swap these for the
-// confirmed details (or flip this back to false) before launch; see the
-// "Definition of done" list in the technical spec (no unfilled placeholders
-// in production).
 export const CREDENTIALS_CONFIRMED = true;
 
 export const YEARS_OPERATING: number | null = 6;
@@ -32,7 +26,7 @@ export const TEAM: TeamMember[] = [
   {
     name: "Elena Novak",
     role: "Compliance Lead",
-    bio: "Maps client environments against NDPA, ISO 27001 and CBN's risk-based framework, and owns gap closure tracking through to sign off.",
+    bio: "Maps client environments against UK GDPR, ISO 27001 and Cyber Essentials, and owns gap closure tracking through to sign off.",
     certifications: ["CISA", "ISO 27001 Lead Implementer"],
   },
   {

@@ -10,7 +10,7 @@ import { ContactSection } from "@/components/sections/contact-section";
 export const metadata: Metadata = {
   title: "Home",
   description:
-    "Cybersecurity risk assessment, gap analysis and training for Nigerian organisations.",
+    "Cybersecurity risk assessment, gap analysis and training for UK organisations.",
 };
 
 export default function Home() {

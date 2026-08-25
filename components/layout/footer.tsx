@@ -4,7 +4,11 @@ import { FOOTER_COLUMNS, SITE } from "@/content/site";
 
 export function Footer() {
   const year = new Date().getFullYear();
-  const registration = [SITE.registeredName, SITE.rcNumber ? `RC ${SITE.rcNumber}` : null, SITE.address]
+  const registration = [
+    SITE.registeredName,
+    SITE.companyNumber ? `Company No. ${SITE.companyNumber}` : null,
+    SITE.address,
+  ]
     .filter(Boolean)
     .join(" · ");
 
@@ -28,7 +32,7 @@ export function Footer() {
               />
             </Link>
             <p className="mt-4 max-w-xs text-sm text-paper/70">
-              Cybersecurity assessment, compliance and training for Nigerian organisations.
+              Cybersecurity assessment, compliance and training for UK organisations.
             </p>
           </div>
 

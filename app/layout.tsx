@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     template: "%s — Prefort Consult",
   },
   description:
-    "Cybersecurity risk assessment, gap analysis and training for Nigerian organisations.",
+    "Cybersecurity risk assessment, gap analysis and training for UK organisations.",
   openGraph: {
     type: "website",
     siteName: "Prefort Consult",

@@ -44,7 +44,7 @@ export const TRAINING_TRACKS: TrainingTrack[] = [
     outcomes: [
       "Leadership can state the organisation's top three exposures",
       "Clarity on who is accountable when something goes wrong",
-      "A shared understanding of NDPA and sector specific obligations",
+      "A shared understanding of UK GDPR and sector specific obligations",
     ],
   },
 ];
