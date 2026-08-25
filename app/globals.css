@@ -18,6 +18,13 @@
      safe for normal-size text. */
   --color-primary: #015CA3;
 
+  /* Footer — deeper than --color-primary on purpose: Logo.png is itself
+     drawn in the brand blue on a white background, so a footer at the same
+     saturation would flatten the logo into it and crush link contrast.
+     This navy still reads as "blue" but sits far enough below the shield's
+     lighter blue (#0098DA) to keep both legible. */
+  --color-footer: #062A4D;
+
   /* Semantic severity — signal/caution/cleared communicate risk state only, never decoration */
   --color-signal: #C2321B;
   --color-signal-soft: #FBEBE7;

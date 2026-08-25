@@ -40,9 +40,8 @@ export function ContactSection() {
             alt=""
             fill
             sizes="(min-width: 768px) 50vw, 100vw"
-            className="object-cover grayscale transition-transform duration-500 ease-out group-hover:scale-105"
+            className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-ink/30 mix-blend-multiply" />
         </Reveal>
       </div>
     </section>

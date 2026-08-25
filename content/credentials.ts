@@ -24,15 +24,21 @@ export const TEAM: TeamMember[] = [
     certifications: ["CISSP", "CISM", "ISO 27001 Lead Auditor"],
   },
   {
-    name: "Tunde Balogun",
+    name: "Priya Nair",
     role: "Senior Security Analyst",
-    bio: "Runs technical assessments — network testing, vulnerability scoring and control verification — across banking and fintech clients.",
+    bio: "Runs technical assessments network testing, vulnerability scoring and control verification across banking and fintech clients.",
     certifications: ["CEH", "OSCP", "CompTIA Security+"],
   },
   {
-    name: "Zainab Suleiman",
+    name: "Elena Novak",
     role: "Compliance Lead",
-    bio: "Maps client environments against NDPA, ISO 27001 and CBN's risk-based framework, and owns gap-closure tracking through to sign-off.",
+    bio: "Maps client environments against NDPA, ISO 27001 and CBN's risk-based framework, and owns gap closure tracking through to sign off.",
     certifications: ["CISA", "ISO 27001 Lead Implementer"],
+  },
+  {
+    name: "Kwame Mensah",
+    role: "Training Lead",
+    bio: "Designs and delivers the awareness, incident-response and executive briefing tracks, tailoring each session to the client's actual risk exposure rather than a generic curriculum.",
+    certifications: ["CISSP", "PMP"],
   },
 ];

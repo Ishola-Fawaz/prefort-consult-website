@@ -36,9 +36,8 @@ export default function TrainingPage() {
                 alt=""
                 fill
                 sizes="(min-width: 768px) 33vw, 100vw"
-                className="object-cover grayscale"
+                className="object-cover"
               />
-              <div className="absolute inset-0 bg-ink/35 mix-blend-multiply" />
             </div>
             <div className="flex flex-1 flex-col p-6">
               <p className="font-mono text-xs uppercase tracking-[0.09em] text-slate">

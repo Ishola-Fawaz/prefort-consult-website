@@ -37,9 +37,8 @@ export default function AboutPage() {
               alt=""
               fill
               sizes="(min-width: 768px) 50vw, 100vw"
-              className="object-cover grayscale"
+              className="object-cover"
             />
-            <div className="absolute inset-0 bg-ink/30 mix-blend-multiply" />
           </div>
         </div>
       </div>
