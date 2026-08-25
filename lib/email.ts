@@ -3,9 +3,6 @@ import type { EnquiryInput } from "@/lib/schemas";
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
-// Requires the sending domain to be verified in Resend before this can
-// actually deliver — blocked on a working business domain/email, scope §11
-// item 5.
 const FROM = "Prefort Consult <enquiries@prefortconsult.com>";
 
 export async function sendEnquiryNotification(data: EnquiryInput) {

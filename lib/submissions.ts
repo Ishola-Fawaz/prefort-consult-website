@@ -1,7 +1,6 @@
 import { supabaseAdmin } from "@/lib/supabase/admin";
 import type { EnquiryInput } from "@/lib/schemas";
 
-// Schema in lib/submissions.sql — run once against the provisioned Supabase project.
 export async function saveSubmission(data: EnquiryInput) {
   if (!supabaseAdmin) {
     throw new Error("NEXT_PUBLIC_SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY are not configured");

@@ -12,9 +12,6 @@ export type Enquiry = {
   created_at: string;
 };
 
-// Reads run as the logged-in admin under RLS (see the SELECT policy in
-// lib/submissions.sql) — not via the service role — so an unauthenticated
-// caller gets an empty result rather than a bypass.
 export async function listEnquiries(): Promise<Enquiry[]> {
   const supabase = await createClient();
   const { data, error } = await supabase

@@ -21,6 +21,11 @@ export const enquirySchema = z.object({
   // in §8.2 step 3 — defeating the point of a honeypot. The route handler
   // checks this value after a successful parse instead.
   website: z.string().optional(),
+  // reCAPTCHA tokens — verified server-side in the route handler, not
+  // treated as form data. v3 runs invisibly on every submit; v2 is only
+  // present on a retry after the server asks for it (low v3 score).
+  recaptchaV3Token: z.string().optional(),
+  recaptchaV2Token: z.string().optional(),
 });
 
 export type EnquiryInput = z.infer<typeof enquirySchema>;

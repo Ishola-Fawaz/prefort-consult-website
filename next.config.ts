@@ -12,13 +12,18 @@ const isDev = process.env.NODE_ENV === "development";
 // Baseline allowlist for Milestone 1 (no analytics/CMS wired yet). Revisit at
 // Milestone 6 — add the analytics script origin and any CMS image domain
 // before launch, per spec §12.
+// reCAPTCHA (components/forms/enquiry-form.tsx) needs its script origins in
+// script-src, its own XHR calls in connect-src, and the checkbox/challenge
+// iframe explicitly allowed in frame-src (falls back to default-src 'self'
+// otherwise, which would silently block the widget).
 const contentSecurityPolicy = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
+  `script-src 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com${isDev ? " 'unsafe-eval'" : ""}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data:",
   "font-src 'self'",
-  "connect-src 'self'",
+  "connect-src 'self' https://www.google.com",
+  "frame-src https://www.google.com",
   "frame-ancestors 'none'",
   "base-uri 'self'",
   "form-action 'self'",

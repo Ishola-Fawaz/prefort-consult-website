@@ -14,7 +14,7 @@ export default function ContactPage() {
       <SectionHeading
         eyebrow="Get in touch"
         title="Tell us what you're dealing with"
-        lede="Fill in the form and we'll come back to you — usually within a business day."
+        lede="Fill in the form and we'll come back to you usually within a business day."
       />
 
       <div className="mt-10">

@@ -7,8 +7,6 @@ export type TrainingTrack = {
   outcomes: string[];
 };
 
-// Duration, delivery format, price and certification issued are blocked on
-// client input — scope §11 item 9. Marked explicitly rather than guessed.
 export const TRAINING_TRACKS: TrainingTrack[] = [
   {
     slug: "awareness",
@@ -16,7 +14,7 @@ export const TRAINING_TRACKS: TrainingTrack[] = [
     audience: "All staff",
     title: "Security awareness",
     summary:
-      "Practical training on the everyday habits that cause most breaches — phishing, password reuse, unsecured file sharing.",
+      "Practical training on the everyday habits that cause most breaches phishing, password reuse, unsecured file sharing.",
     outcomes: [
       "Staff can identify a phishing attempt",
       "Shared credentials and personal-email workarounds are retired",
@@ -46,7 +44,7 @@ export const TRAINING_TRACKS: TrainingTrack[] = [
     outcomes: [
       "Leadership can state the organisation's top three exposures",
       "Clarity on who is accountable when something goes wrong",
-      "A shared understanding of NDPA and sector-specific obligations",
+      "A shared understanding of NDPA and sector specific obligations",
     ],
   },
 ];
