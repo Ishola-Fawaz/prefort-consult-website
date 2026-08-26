@@ -15,7 +15,7 @@ export const SERVICES: Service[] = [
     tag: "Start here",
     title: "Risk assessment",
     summary:
-      "A structured review of where your organisation is exposed systems, access, process and people ranked by likelihood and impact, not by how alarming it sounds.",
+      "A structured review of where your organisation is exposed. Systems, access, process and people ranked by risk likelihood and impact, not by how alarming it sounds.",
     deliverable:
       "A ranked risk register with findings, severity and recommended remediation order.",
   },
@@ -25,7 +25,7 @@ export const SERVICES: Service[] = [
     tag: "Compliance",
     title: "Gap analysis",
     summary:
-      "A control by control comparison of current practice against the standard you're working toward UK GDPR, ISO 27001, PCI DSS or Cyber Essentials with what's missing made explicit.",
+      "A control by control analysis of current practice against the standard you're working toward (UK GDPR), (ISO 27001), (PCI DSS) or Cyber Essentials with what's missing made explicit.",
     deliverable:
       "A control by control gap report mapped to the chosen standard, with an owner and effort estimate per gap.",
   },
@@ -45,7 +45,7 @@ export const SERVICES: Service[] = [
     tag: "Ongoing",
     title: "Network protection",
     summary:
-      "Implementation and monitoring of the controls a risk assessment or gap analysis marks as priority access hardening, backup verification, monitoring handed over with evidence it works.",
+      "Implementation and monitoring of the controls a risk assessment or gap analysis marks as priority, like access hardening, backup verification, monitoring handed over with evidence it works.",
     deliverable:
       "A closure statement confirming each agreed control is in place, with the evidence behind it.",
   },

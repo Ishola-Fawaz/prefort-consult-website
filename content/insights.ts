@@ -14,9 +14,6 @@ export type Article = {
   body: ArticleBlock[];
 };
 
-// Migrated and rewritten from the legacy prefortconsult.com/blog/ archive.
-// INSIGHTS_CONFIRMED gates whether the list/teaser render this content —
-// flip to false if ARTICLES is ever emptied out again.
 export const INSIGHTS_CONFIRMED = true;
 
 export const ARTICLES: Article[] = [
@@ -70,11 +67,11 @@ export const ARTICLES: Article[] = [
     body: [
       {
         type: "paragraph",
-        text: "Cryptography is the technique of securing information and communication through codes, so that only the people the information is intended for can read it. The word combines the Greek for \"hidden\" and \"writing\" — which is a fair description of what it does: convert a readable message into something unreadable to anyone without the key.",
+        text: 'Cryptography is the technique of securing information and communication through codes, so that only the people the information is intended for can read it. The word combines the Greek for "hidden" and "writing" — which is a fair description of what it does: convert a readable message into something unreadable to anyone without the key.',
       },
       {
         type: "paragraph",
-        text: "Modern cryptography relies on mathematical algorithms — for key generation, digital signing, verification and encryption — to support things like private data storage, secure browsing and confidential transactions such as card payments.",
+        text: "Modern cryptography relies on mathematical algorithms — for key generation, digital signing, verification and encryption to support things like private data storage, secure browsing and confidential transactions such as card payments.",
       },
       { type: "heading", text: "The four properties" },
       {
@@ -88,7 +85,7 @@ export const ARTICLES: Article[] = [
       },
       {
         type: "paragraph",
-        text: "A system that only delivers confidentiality but not integrity, or authentication without non-repudiation, is incomplete — each property covers a different failure mode, and dropping one reopens it. Encryption also underpins access control more broadly: a resource is only accessible to a party with both the right permissions and the correct key, which is what makes cryptography the basis for so much of practical information security rather than a niche within it.",
+        text: "A system that only delivers confidentiality but not integrity, or authentication without non-repudiation, is incomplete each property covers a different failure mode, and dropping one reopens it. Encryption also underpins access control more broadly: a resource is only accessible to a party with both the right permissions and the correct key, which is what makes cryptography the basis for so much of practical information security rather than a niche within it.",
       },
     ],
   },
@@ -187,14 +184,14 @@ export const ARTICLES: Article[] = [
     slug: "cloud-security",
     title: "Cloud security is a shared responsibility",
     summary:
-      "Cloud security depends on both the provider and the client getting their half right — and knowing which half is theirs.",
+      "Cloud security depends on both the provider and the client getting their half right and knowing which half is theirs.",
     category: "Cloud security",
     publishedAt: "9 March 2019",
     readTime: "2 min read",
     body: [
       {
         type: "paragraph",
-        text: "Cloud security is the discipline of securing cloud computing systems — keeping data private and safe across infrastructure, applications and platforms that you don't fully control. Securing it is a joint effort between the provider and whoever is using the service, whether that's an individual, a small business or a large enterprise.",
+        text: "Cloud security is the discipline of securing cloud computing systems keeping data private and safe across infrastructure, applications and platforms that you don't fully control. Securing it is a joint effort between the provider and whoever is using the service, whether that's an individual, a small business or a large enterprise.",
       },
       {
         type: "paragraph",

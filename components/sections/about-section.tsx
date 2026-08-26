@@ -23,7 +23,7 @@ export function AboutSection({ headingLevel = "h2", showLink = false }: AboutSec
           <p className="mt-5 max-w-lg text-lg text-slate">
             Prefort Consult runs risk assessments, closes compliance gaps and trains staff for
             organisations operating in the UK. The output of every engagement is something
-            written down a register, a report, a closure statement not a slide deck.
+            written down in a register, a report, a closure statement not a slide deck.
           </p>
           {showLink && (
             <div className="mt-6">
