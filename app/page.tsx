@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/sections/hero";
+import { AboutSection } from "@/components/sections/about-section";
 import { SectorStrip } from "@/components/sections/sector-strip";
 import { Services } from "@/components/sections/services";
 import { Credentials } from "@/components/sections/credentials";
@@ -17,6 +18,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <AboutSection showLink />
       <SectorStrip />
       <Services />
       <Credentials />

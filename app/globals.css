@@ -87,6 +87,33 @@
   opacity: 0.6;
 }
 
+/* Same texture, recoloured for the blue hero background — --color-rule at
+   any opacity reads as invisible against --color-primary, so this uses
+   white lines instead of relying on the opacity trick above.
+   background-attachment: fixed anchors the tiling to the viewport rather
+   than each element's own box, so the header's grid (below) lines up
+   continuously with this one instead of the pattern restarting at the seam. */
+.bg-report-grid-inverse {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, white 20%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, white 20%, transparent) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-attachment: fixed;
+  -webkit-mask-image: radial-gradient(ellipse 75% 60% at 30% 20%, black 40%, transparent 85%);
+  mask-image: radial-gradient(ellipse 75% 60% at 30% 20%, black 40%, transparent 85%);
+}
+
+/* Same grid, same viewport-fixed anchoring, for the header while it's over
+   the hero. No radial mask — the header bar is too short (64px) for a fade
+   to read as anything but an arbitrary crop, so it shows the flat tiling. */
+.bg-report-grid-header {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, white 20%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, white 20%, transparent) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-attachment: fixed;
+}
+
 /* On-load entrance for above-the-fold content. Scroll-triggered content
    below the fold uses the Reveal component instead. */
 @keyframes fade-up {

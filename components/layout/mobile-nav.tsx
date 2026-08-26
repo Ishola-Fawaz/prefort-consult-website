@@ -6,8 +6,9 @@ import Link from "next/link";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Menu01Icon, Cancel01Icon } from "@hugeicons/core-free-icons";
 import { NAV_ITEMS, SITE } from "@/content/site";
+import { cn } from "@/lib/utils";
 
-export function MobileNav() {
+export function MobileNav({ inverse = false }: { inverse?: boolean }) {
   const [open, setOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -62,7 +63,10 @@ export function MobileNav() {
         onClick={() => setOpen(true)}
         aria-expanded={open}
         aria-controls="mobile-nav-panel"
-        className="flex h-10 w-10 items-center justify-center rounded-sm text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+        className={cn(
+          "flex h-10 w-10 items-center justify-center rounded-sm transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2",
+          inverse ? "text-paper focus-visible:outline-paper" : "text-ink focus-visible:outline-ink"
+        )}
       >
         <HugeiconsIcon icon={Menu01Icon} size={24} strokeWidth={1.8} aria-hidden="true" />
         <span className="sr-only">Open menu</span>
