@@ -10,7 +10,7 @@ import { SERVICES } from "@/content/services";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Risk assessment, gap analysis, vulnerability assessment and network protection for UK organisations — each with a stated deliverable.",
+    "Risk assessment, gap analysis, vulnerability assessment and network protection for UK organisations each with a stated deliverable.",
 };
 
 const SERVICE_IMAGES: Record<string, string> = {
@@ -26,7 +26,7 @@ export default function ServicesPage() {
       <SectionHeading
         eyebrow="What we do"
         title="Services"
-        lede="Consulting first. Every engagement ends with something written down — not a category description, a deliverable."
+        lede="Consulting first. Every engagement ends with something written down not a category description, a deliverable."
       />
       <div className="mt-10 grid gap-6 md:grid-cols-2">
         {SERVICES.map((service) => (
@@ -37,9 +37,8 @@ export default function ServicesPage() {
                 alt=""
                 fill
                 sizes="(min-width: 768px) 50vw, 100vw"
-                className="object-cover grayscale transition-transform duration-500 ease-out group-hover:scale-105"
+                className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-ink/35 mix-blend-multiply" />
               <Tag severity={service.severity} className="absolute left-4 top-4">
                 {service.tag}
               </Tag>
