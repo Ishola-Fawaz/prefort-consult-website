@@ -16,6 +16,7 @@ const RECAPTCHA_ACTION = "enquiry_submit";
 declare global {
   interface Window {
     grecaptcha?: {
+      ready: (callback: () => void) => void;
       execute: (siteKey: string, options: { action: string }) => Promise<string>;
       render: (
         container: HTMLElement,
@@ -178,9 +179,20 @@ export function EnquiryForm() {
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
       {(RECAPTCHA_V3_SITE_KEY || RECAPTCHA_V2_SITE_KEY) && (
         <Script
-          src="https://www.google.com/recaptcha/api.js?render=explicit"
+          // v3's execute() only works with a site key declared right here in
+          // the script URL — it can't be passed at call time. render=explicit
+          // would leave v3 permanently rejecting our key ("Invalid site key
+          // or not loaded in api.js"), even though .ready()/.execute() exist
+          // and appear to work. .render() (the v2 checkbox) has no such
+          // restriction, so it's unaffected either way.
+          src={`https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_V3_SITE_KEY ?? "explicit"}`}
           strategy="afterInteractive"
-          onLoad={() => setRecaptchaReady(true)}
+          onLoad={() => {
+            // window.grecaptcha exists as soon as the script file loads, but
+            // .execute/.render aren't attached until Google's own async init
+            // finishes — grecaptcha.ready() is what actually waits for that.
+            window.grecaptcha?.ready(() => setRecaptchaReady(true));
+          }}
         />
       )}
 
