@@ -9,18 +9,19 @@ import { enquirySchema, SERVICE_OPTIONS, type EnquiryInput } from "@/lib/schemas
 import { track } from "@/lib/analytics";
 import { SITE } from "@/content/site";
 
-const RECAPTCHA_V3_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_V3_SITE_KEY;
 const RECAPTCHA_V2_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_V2_SITE_KEY;
-const RECAPTCHA_ACTION = "enquiry_submit";
 
 declare global {
   interface Window {
     grecaptcha?: {
       ready: (callback: () => void) => void;
-      execute: (siteKey: string, options: { action: string }) => Promise<string>;
       render: (
         container: HTMLElement,
-        params: { sitekey: string; callback: (token: string) => void }
+        params: {
+          sitekey: string;
+          callback: (token: string) => void;
+          "expired-callback"?: () => void;
+        }
       ) => number;
     };
   }
@@ -59,31 +60,31 @@ export function EnquiryForm() {
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
-  // reCAPTCHA v3 runs invisibly on every submit. If the server scores that
-  // submission too low, it asks for the v2 checkbox instead of rejecting
-  // outright — recaptchaChallenge switches the form into that fallback mode.
+  // reCAPTCHA v2 — a visible checkbox the visitor has to actually check
+  // (Google shows an image challenge automatically when it isn't sure).
+  // Rendered once the script loads; the widget itself is what surfaces the
+  // token via its callback, not anything we call on submit.
   const [recaptchaReady, setRecaptchaReady] = useState(false);
-  const [recaptchaChallenge, setRecaptchaChallenge] = useState(false);
-  const [v2Token, setV2Token] = useState<string | null>(null);
-  const v2ContainerRef = useRef<HTMLDivElement>(null);
-  const v2Rendered = useRef(false);
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+  const widgetContainerRef = useRef<HTMLDivElement>(null);
+  const widgetRendered = useRef(false);
 
   useEffect(() => {
     if (
-      !recaptchaChallenge ||
       !recaptchaReady ||
       !RECAPTCHA_V2_SITE_KEY ||
-      v2Rendered.current ||
-      !v2ContainerRef.current
+      widgetRendered.current ||
+      !widgetContainerRef.current
     ) {
       return;
     }
-    v2Rendered.current = true;
-    window.grecaptcha?.render(v2ContainerRef.current, {
+    widgetRendered.current = true;
+    window.grecaptcha?.render(widgetContainerRef.current, {
       sitekey: RECAPTCHA_V2_SITE_KEY,
-      callback: (token) => setV2Token(token),
+      callback: (token) => setRecaptchaToken(token),
+      "expired-callback": () => setRecaptchaToken(null),
     });
-  }, [recaptchaChallenge, recaptchaReady]);
+  }, [recaptchaReady]);
 
   function handleChange(name: keyof FormState, value: string) {
     setValues((prev) => ({ ...prev, [name]: value }));
@@ -116,46 +117,24 @@ export function EnquiryForm() {
       return;
     }
 
-    if (recaptchaChallenge && !v2Token) {
+    if (RECAPTCHA_V2_SITE_KEY && !recaptchaToken) {
       // Submit button is disabled in this state too — this is a safety net.
       return;
     }
 
     setStatus("submitting");
 
-    let recaptchaV3Token: string | undefined;
-    if (recaptchaReady && RECAPTCHA_V3_SITE_KEY && window.grecaptcha) {
-      try {
-        recaptchaV3Token = await window.grecaptcha.execute(RECAPTCHA_V3_SITE_KEY, {
-          action: RECAPTCHA_ACTION,
-        });
-      } catch {
-        // Proceed without a v3 token — the server falls back to v2 (or, if
-        // reCAPTCHA isn't configured server-side either, skips it entirely).
-      }
-    }
-
     try {
       const res = await fetch("/api/enquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...parsed.data,
-          recaptchaV3Token,
-          recaptchaV2Token: v2Token ?? undefined,
-        }),
+        body: JSON.stringify({ ...parsed.data, recaptchaV2Token: recaptchaToken ?? undefined }),
       });
       const json = await res.json();
 
       if (res.ok && json.ok) {
         setStatus("success");
         track({ name: "enquiry_submitted", service: parsed.data.service });
-        return;
-      }
-
-      if (json.error === "recaptcha_challenge") {
-        setRecaptchaChallenge(true);
-        setStatus("idle");
         return;
       }
 
@@ -177,20 +156,14 @@ export function EnquiryForm() {
 
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
-      {(RECAPTCHA_V3_SITE_KEY || RECAPTCHA_V2_SITE_KEY) && (
+      {RECAPTCHA_V2_SITE_KEY && (
         <Script
-          // v3's execute() only works with a site key declared right here in
-          // the script URL — it can't be passed at call time. render=explicit
-          // would leave v3 permanently rejecting our key ("Invalid site key
-          // or not loaded in api.js"), even though .ready()/.execute() exist
-          // and appear to work. .render() (the v2 checkbox) has no such
-          // restriction, so it's unaffected either way.
-          src={`https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_V3_SITE_KEY ?? "explicit"}`}
+          src="https://www.google.com/recaptcha/api.js?render=explicit"
           strategy="afterInteractive"
           onLoad={() => {
             // window.grecaptcha exists as soon as the script file loads, but
-            // .execute/.render aren't attached until Google's own async init
-            // finishes — grecaptcha.ready() is what actually waits for that.
+            // .render isn't attached until Google's own async init finishes
+            // — grecaptcha.ready() is what actually waits for that.
             window.grecaptcha?.ready(() => setRecaptchaReady(true));
           }}
         />
@@ -285,14 +258,7 @@ export function EnquiryForm() {
         error={errors.message}
       />
 
-      {recaptchaChallenge && (
-        <div className="flex flex-col gap-2">
-          <p className="text-sm text-ink">
-            Quick check before we send this — please confirm you&apos;re not a bot.
-          </p>
-          <div ref={v2ContainerRef} />
-        </div>
-      )}
+      {RECAPTCHA_V2_SITE_KEY && <div ref={widgetContainerRef} />}
 
       {status === "error" && (
         <p className="text-sm text-signal">
@@ -310,7 +276,7 @@ export function EnquiryForm() {
 
       <Button
         type="submit"
-        disabled={status === "submitting" || (recaptchaChallenge && !v2Token)}
+        disabled={status === "submitting" || (!!RECAPTCHA_V2_SITE_KEY && !recaptchaToken)}
         icon={SentIcon}
       >
         {status === "submitting" ? "Sending…" : "Send enquiry"}

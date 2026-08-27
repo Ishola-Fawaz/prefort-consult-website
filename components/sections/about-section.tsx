@@ -3,9 +3,7 @@ import { ArrowRight01Icon } from "@hugeicons/core-free-icons";
 import { Button } from "@/components/ui/button";
 
 type AboutSectionProps = {
-  /** The homepage already has its own <h1> (Hero) — this section must not add a second one. */
   headingLevel?: "h1" | "h2";
-  /** Shown only on the homepage, pointing through to the full About page. */
   showLink?: boolean;
 };
 
